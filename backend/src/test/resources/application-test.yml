@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: ${TEST_DATABASE_URL:jdbc:postgresql://localhost:5432/boletas_test}
+    username: ${TEST_DATABASE_USER:boletas}
+    password: ${TEST_DATABASE_PASSWORD:boletas}
+  flyway:
+    clean-disabled: false
+
+app:
+  admin:
+    usuario: admin
+    clave: admin123
