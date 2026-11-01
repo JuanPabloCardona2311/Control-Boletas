@@ -1,0 +1,29 @@
+server:
+  port: ${PORT:8080}
+  compression:
+    enabled: true
+    mime-types: application/json
+
+spring:
+  application:
+    name: control-boletas
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/boletas}
+    username: ${DATABASE_USER:boletas}
+    password: ${DATABASE_PASSWORD:boletas}
+    hikari:
+      maximum-pool-size: ${DATABASE_POOL:5}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+app:
+  zona-horaria: America/Bogota
+  frontend-url: ${FRONTEND_URL:http://localhost:5173}
+  jwt:
+    secreto: ${JWT_SECRET:solo-para-desarrollo-cambiar-en-produccion-0123456789}
+    dias: ${JWT_DIAS:30}
+  admin:
+    usuario: ${ADMIN_USUARIO:}
+    clave: ${ADMIN_CLAVE:}
