@@ -3,6 +3,7 @@ package co.elmulardeoro.boletas;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.head;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -65,6 +66,13 @@ class FlujoBoletasTest {
         String rifa = enviar(post("/api/rifas"), admin, RIFA).andExpect(status().isCreated())
                 .andReturn().getResponse().getContentAsString();
         rifaId = ((Number) JsonPath.read(rifa, "$.id")).longValue();
+    }
+
+    @Test
+    void saludRespondeSinSesionConGetYHead() throws Exception {
+        // UptimeRobot revisa con HEAD; si da 401 cree que el backend está caído
+        mvc.perform(get("/api/salud")).andExpect(status().isOk()).andExpect(jsonPath("$.estado").value("ok"));
+        mvc.perform(head("/api/salud")).andExpect(status().isOk());
     }
 
     @Test
