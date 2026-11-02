@@ -13,6 +13,10 @@ spring:
     password: ${DATABASE_PASSWORD:boletas}
     hikari:
       maximum-pool-size: ${DATABASE_POOL:5}
+  flyway:
+    # Supabase trae objetos propios en el esquema public; sin esto Flyway no corre la primera migración
+    baseline-on-migrate: true
+    baseline-version: 0
   jpa:
     open-in-view: false
     hibernate:
